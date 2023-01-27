@@ -24,7 +24,11 @@ namespace DesktopDirectore.Plugins.Audio
 
         public void Execute(Message message)
         {
-            audioDeviceService.SetCommunicationAudioDevice(this.deviceId);
+            // 0 = on because we are reading a low value
+            if (message.Value == 0)
+            {
+                audioDeviceService.SetCommunicationAudioDevice(this.deviceId);
+            }
         }
     }
 }

@@ -35,3 +35,8 @@
 /src/Windows/DesktopDirector.Spike.Console/bin/Debug/net6.0
 /src/Windows/DesktopDirector.Spike.Console/obj
 /.vs
+/src/Windows/DesktopDirector.ArduinoInterface/bin/Debug/net6.0
+/src/Windows/DesktopDirector.ArduinoInterface/obj
+/src/Windows/DesktopDirector.AudioDeviceCmdlets/bin/Debug/net6.0
+/src/Windows/DesktopDirector.AudioDeviceCmdlets/obj
+/src/Windows/DesktopDirector.Console/bin/Debug/net6.0

@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DesktopDirector.ArduinoInterface\DesktopDirector.ArduinoInterface.csproj" />
     <ProjectReference Include="..\DesktopDirector.AudioDeviceCmdlets\DesktopDirector.AudioDeviceCmdlets.csproj" />
+    <ProjectReference Include="..\DesktopDirectore.Plugins\DesktopDirectore.Plugins.csproj" />
   </ItemGroup>
 
 </Project>

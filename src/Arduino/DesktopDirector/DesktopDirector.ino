@@ -92,7 +92,7 @@ void loop() {
       int now = millis();
       if(now - lastChanged > deBounceDelay)
       {
-        String buttonIdentifier = "Button";
+        String buttonIdentifier = "button";
         buttonIdentifier = buttonIdentifier + i;
         SendMessage(buttonIdentifier, currentValue);
         buttonMapping[i][1] = currentValue;
@@ -113,7 +113,7 @@ void loop() {
       int now = millis();
       if(now - lastChanged > deBounceDelay)
       {
-        String potIdentifier = "Pot";
+        String potIdentifier = "pot";
         potIdentifier = potIdentifier + i;
         SendMessage(potIdentifier, currentValue);
         potMapping[i][1] = currentValue;

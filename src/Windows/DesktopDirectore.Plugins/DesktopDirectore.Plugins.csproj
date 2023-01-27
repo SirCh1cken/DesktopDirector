@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DesktopDirector.ArduinoInterface\DesktopDirector.ArduinoInterface.csproj" />
+    <ProjectReference Include="..\DesktopDirector.AudioDeviceCmdlets\DesktopDirector.AudioDeviceCmdlets.csproj" />
+  </ItemGroup>
+
 </Project>

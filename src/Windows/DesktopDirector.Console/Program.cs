@@ -1,6 +1,7 @@
 ﻿using System.IO.Ports;
 using System.Text.Json;
 using DesktopDirector.ArduinoInterface.Model;
+using DesktopDirector.ArduinoInterface.Services;
 using DesktopDirector.AudioDeviceCmdlets.Service;
 
 namespace DesktopDirector.Console
@@ -9,85 +10,56 @@ namespace DesktopDirector.Console
     {
         static void Main(string[] args)
         {
+            System.Console.WriteLine("Listening to messages");
+            var arduinoEventService = new ArduinoEventService();
+            arduinoEventService.MessageRecieved += ArduinoEventService_MessageRecieved;
+            arduinoEventService.StartListening();
+        }
+
+        private static void ArduinoEventService_MessageRecieved(object? sender, ArduinoMessageArgs e)
+        {
             var audioDeviceService = new AudioDeviceService();
             var devices = audioDeviceService.GetAudioDevices().ToList();
 
-            for (int i = 0; i < devices.Count(); i++)
+            var message = e.Message;
+            switch (message.Input)
             {
-                var device = devices[i];
-                System.Console.WriteLine($"[{i}] {device.Name} - {device.ID}");
-            }
-
-            //SetDefaultAudioDevice(devices[0].ID);
-            //SetCommunicationAudioDevice(devices[0].ID);
-
-            SerialPort serialPort;
-            serialPort = new SerialPort();
-            serialPort.PortName = "COM4";//Set your board COM
-            serialPort.BaudRate = 9600;
-            serialPort.Open();
-
-
-            while (true)
-            {
-                string inputMessage = serialPort.ReadLine();
-
-                if (!string.IsNullOrEmpty(inputMessage))
-                {
-                    System.Console.WriteLine(inputMessage);
-                    try
+                case "Button0":
+                    if (message.Value == 1)
                     {
-                        var message = JsonSerializer.Deserialize<Message>(inputMessage);
-
-                        switch (message.Input)
-                        {
-                            case "Button0":
-                                if (message.Value == 1)
-                                {
-                                    audioDeviceService.SetDefaultAudioDevice(devices[0].ID);
-                                }
-                                break;
-                            case "Button1":
-                                if (message.Value == 1)
-                                {
-                                    audioDeviceService.SetCommunicationAudioDevice(devices[0].ID);
-                                }
-                                break;
-                            case "Button2":
-                                if (message.Value == 1)
-                                {
-                                    audioDeviceService.SetDefaultAudioDevice(devices[1].ID);
-                                }
-                                break;
-                            case "Button3":
-                                if (message.Value == 1)
-                                {
-                                    audioDeviceService.SetCommunicationAudioDevice(devices[1].ID);
-                                }
-                                break;
-                            case "Button4":
-                                if (message.Value == 1)
-                                {
-                                    audioDeviceService.SetDefaultAudioDevice(devices[2].ID);
-                                }
-                                break;
-                            case "Button5":
-                                if (message.Value == 1)
-                                {
-                                        audioDeviceService.SetCommunicationAudioDevice(devices[2].ID);
-                                }
-                                break;
-                        }
+                        audioDeviceService.SetDefaultAudioDevice(devices[0].ID);
                     }
-                    catch (Exception ex)
+                    break;
+                case "Button1":
+                    if (message.Value == 1)
                     {
-                        System.Console.WriteLine("Invalid message:" + inputMessage);
+                        audioDeviceService.SetCommunicationAudioDevice(devices[0].ID);
                     }
-
-
-
-                }
-                Thread.Sleep(100);
+                    break;
+                case "Button2":
+                    if (message.Value == 1)
+                    {
+                        audioDeviceService.SetDefaultAudioDevice(devices[1].ID);
+                    }
+                    break;
+                case "Button3":
+                    if (message.Value == 1)
+                    {
+                        audioDeviceService.SetCommunicationAudioDevice(devices[1].ID);
+                    }
+                    break;
+                case "Button4":
+                    if (message.Value == 1)
+                    {
+                        audioDeviceService.SetDefaultAudioDevice(devices[2].ID);
+                    }
+                    break;
+                case "Button5":
+                    if (message.Value == 1)
+                    {
+                        audioDeviceService.SetCommunicationAudioDevice(devices[2].ID);
+                    }
+                    break;
             }
         }
     }

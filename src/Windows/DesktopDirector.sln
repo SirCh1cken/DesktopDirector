@@ -5,11 +5,15 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopDirector.Console", "DesktopDirector.Console\DesktopDirector.Console.csproj", "{4378ACC0-5170-49AC-98F6-0524C2BEBF52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopDirector.AudioDeviceCmdlets", "DesktopDirector.AudioDeviceCmdlets\DesktopDirector.AudioDeviceCmdlets.csproj", "{E511BBDB-C14B-46AA-A116-4B63F53186B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopDirector.AudioDeviceCmdlets", "DesktopDirector.AudioDeviceCmdlets\DesktopDirector.AudioDeviceCmdlets.csproj", "{E511BBDB-C14B-46AA-A116-4B63F53186B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopDirector.ArduinoInterface", "DesktopDirector.ArduinoInterface\DesktopDirector.ArduinoInterface.csproj", "{C0A698B4-7A5F-494C-9B78-65DE60A568F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopDirector.ArduinoInterface", "DesktopDirector.ArduinoInterface\DesktopDirector.ArduinoInterface.csproj", "{C0A698B4-7A5F-494C-9B78-65DE60A568F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopDirectore.Plugins", "DesktopDirectore.Plugins\DesktopDirectore.Plugins.csproj", "{CC51FCAB-12DC-4EF9-ACF3-D7321165151D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopDirectore.Plugins", "DesktopDirectore.Plugins\DesktopDirectore.Plugins.csproj", "{CC51FCAB-12DC-4EF9-ACF3-D7321165151D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{5685D86B-7A8F-4FD0-89A9-1B6DE26BBAE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{A4BCDBB9-449F-4BDB-BAC8-AFEC09C66CC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +40,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4378ACC0-5170-49AC-98F6-0524C2BEBF52} = {A4BCDBB9-449F-4BDB-BAC8-AFEC09C66CC5}
+		{E511BBDB-C14B-46AA-A116-4B63F53186B4} = {5685D86B-7A8F-4FD0-89A9-1B6DE26BBAE6}
+		{C0A698B4-7A5F-494C-9B78-65DE60A568F7} = {5685D86B-7A8F-4FD0-89A9-1B6DE26BBAE6}
+		{CC51FCAB-12DC-4EF9-ACF3-D7321165151D} = {5685D86B-7A8F-4FD0-89A9-1B6DE26BBAE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE697378-AA09-4E80-8B50-F29CAA98F1C2}

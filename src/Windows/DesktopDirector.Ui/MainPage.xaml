@@ -4,38 +4,123 @@
              x:Class="DesktopDirector.Ui.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
+        <HorizontalStackLayout>
+            <VerticalStackLayout
+                Padding="30,0">
+                <Label
+                Text="Components"
+                SemanticProperties.HeadingLevel="Level1"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="32"
+                HorizontalOptions="Center" />
+                <Label
+                Text="Component1"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+                <Label
+                Text="Component2"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+                <Label
+                Text="Component3"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+                <Label
+                Text="Component4"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                Padding="30,0">
+                <Label
+                Text="Selected Component"
+                SemanticProperties.HeadingLevel="Level1"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="32"
+                HorizontalOptions="Center" />
+                <Label
+                Text="Address"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+                <Label
+                Text="Type"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                Padding="30,0">
+                <Label
+                Text="Configuration for Selected Component"
+                SemanticProperties.HeadingLevel="Level1"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="32"
+                HorizontalOptions="Center" />
+                <Label
+                Text="Change Default Audio Device Plugin"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                Padding="30,0">
+                <Label
+                Text="Plugin Config"
+                SemanticProperties.HeadingLevel="Level1"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="32"
+                HorizontalOptions="Center" />
+                <Label
+                Text="Pick Audio Device"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <!--<VerticalStackLayout
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Image
+                <Image
                 Source="dotnet_bot.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
                 HorizontalOptions="Center" />
 
-            <Label
+                <Label
                 Text="Hello, World!"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-            <Label
+                <Label
                 Text="Welcome to .NET Multi-platform App UI"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
                 HorizontalOptions="Center" />
 
-            <Button
+                <Button
                 x:Name="CounterBtn"
                 Text="Click me"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
+            </VerticalStackLayout>-->
+        </HorizontalStackLayout>
     </ScrollView>
 
 </ContentPage>

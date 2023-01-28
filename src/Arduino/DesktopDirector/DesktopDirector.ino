@@ -37,7 +37,7 @@ int potMapping[numberOfPots][3] =
 {
   {kCh1Pot, 0, 0},
   {kCh2Pot, 0, 0},
-  {kCh2Pot, 0, 0},
+  {kCh3Pot, 0, 0},
 };
 
 void setup() {

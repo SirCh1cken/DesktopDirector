@@ -48,4 +48,21 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Resources\Images\icon_about.png" />
+	  <None Remove="Resources\Images\icon_notes.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\DesktopDirector.ArduinoInterface\DesktopDirector.ArduinoInterface.csproj" />
+	  <ProjectReference Include="..\DesktopDirector.AudioDeviceCmdlets\DesktopDirector.AudioDeviceCmdlets.csproj" />
+	  <ProjectReference Include="..\DesktopDirectore.Plugins\DesktopDirector.Plugins.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="AboutPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

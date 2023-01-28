@@ -3,8 +3,8 @@ using System.Text.Json;
 using DesktopDirector.ArduinoInterface.Model;
 using DesktopDirector.ArduinoInterface.Services;
 using DesktopDirector.AudioDeviceCmdlets.Service;
-using DesktopDirectore.Plugins;
-using DesktopDirectore.Plugins.Audio;
+using DesktopDirector.Plugins;
+using DesktopDirector.Plugins.Audio;
 
 namespace DesktopDirector.Console
 {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesktopDirectore.Plugins.Audio
+namespace DesktopDirector.Plugins.Audio
 {
     public class DefaultAudioDeviceSelection : IPlugin
     {

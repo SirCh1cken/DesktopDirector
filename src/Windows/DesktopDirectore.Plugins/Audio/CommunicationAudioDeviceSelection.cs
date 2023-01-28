@@ -1,7 +1,7 @@
 ﻿using DesktopDirector.ArduinoInterface.Model;
 using DesktopDirector.AudioDeviceCmdlets.Service;
 
-namespace DesktopDirectore.Plugins.Audio
+namespace DesktopDirector.Plugins.Audio
 {
     public class CommunicationAudioDeviceSelection : IPlugin
     {

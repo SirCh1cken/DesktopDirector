@@ -1,6 +1,6 @@
 ﻿using DesktopDirector.ArduinoInterface.Model;
 
-namespace DesktopDirectore.Plugins
+namespace DesktopDirector.Plugins
 {
     public interface IPlugin
     {

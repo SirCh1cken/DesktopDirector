@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{A4BCDBB9-449F-4BDB-BAC8-AFEC09C66CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopDirector.Ui", "DesktopDirector.Ui\DesktopDirector.Ui.csproj", "{503CA59B-C845-4137-B2C2-0451972155B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesktopDirector.Ui", "DesktopDirector.Ui\DesktopDirector.Ui.csproj", "{503CA59B-C845-4137-B2C2-0451972155B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopDirector.App", "DesktopDirectore.Application\DesktopDirector.App.csproj", "{17D99F44-2799-4FB2-B577-55B9A265C3DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{503CA59B-C845-4137-B2C2-0451972155B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{503CA59B-C845-4137-B2C2-0451972155B2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{503CA59B-C845-4137-B2C2-0451972155B2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{17D99F44-2799-4FB2-B577-55B9A265C3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17D99F44-2799-4FB2-B577-55B9A265C3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17D99F44-2799-4FB2-B577-55B9A265C3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17D99F44-2799-4FB2-B577-55B9A265C3DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{C0A698B4-7A5F-494C-9B78-65DE60A568F7} = {5685D86B-7A8F-4FD0-89A9-1B6DE26BBAE6}
 		{CC51FCAB-12DC-4EF9-ACF3-D7321165151D} = {5685D86B-7A8F-4FD0-89A9-1B6DE26BBAE6}
 		{503CA59B-C845-4137-B2C2-0451972155B2} = {A4BCDBB9-449F-4BDB-BAC8-AFEC09C66CC5}
+		{17D99F44-2799-4FB2-B577-55B9A265C3DB} = {5685D86B-7A8F-4FD0-89A9-1B6DE26BBAE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EE697378-AA09-4E80-8B50-F29CAA98F1C2}

@@ -54,9 +54,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\DesktopDirector.ArduinoInterface\DesktopDirector.ArduinoInterface.csproj" />
-	  <ProjectReference Include="..\DesktopDirector.AudioDeviceCmdlets\DesktopDirector.AudioDeviceCmdlets.csproj" />
-	  <ProjectReference Include="..\DesktopDirectore.Plugins\DesktopDirector.Plugins.csproj" />
+	  <ProjectReference Include="..\DesktopDirectore.Application\DesktopDirector.App.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

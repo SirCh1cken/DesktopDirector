@@ -71,6 +71,14 @@ void setup() {
 
 void loop() {
 
+  if(Serial.available() > 0)  
+  {          
+    String receivedMessage = Serial.readStringUntil('\n');
+    if(receivedMessage == "request-configuration")
+    {
+      SendConfiurationMessage();
+    }
+  }
 
   for(int i = 0; i < numberOfButtons ; i++)
   {
@@ -130,5 +138,27 @@ void SendMessage(String inputIdentifier, int value)
   message = message + "\",\"Value\":";
   message = message + value;
   message += "}\r\n";
+  Serial.print(message);
+}
+
+void SendConfiurationMessage()
+{
+  String message = "[";
+  message += "{\"Name\":\"button0\",\"Type\":\"button\"},";
+  message += "{\"Name\":\"button1\",\"Type\":\"button\"},";
+  message += "{\"Name\":\"button2\",\"Type\":\"button\"},";
+  message += "{\"Name\":\"button3\",\"Type\":\"button\"},";
+  message += "{\"Name\":\"button4\",\"Type\":\"button\"},";
+  message += "{\"Name\":\"button5\",\"Type\":\"button\"},";
+  message += "{\"Name\":\"pot0\",\"Type\":\"knob\"},";
+  message += "{\"Name\":\"pot1\",\"Type\":\"knob\"},";
+  message += "{\"Name\":\"pot2\",\"Type\":\"knob\"},";
+  message += "{\"Name\":\"led0\",\"Type\":\"led\"},";
+  message += "{\"Name\":\"led1\",\"Type\":\"led\"},";
+  message += "{\"Name\":\"led2\",\"Type\":\"led\"},";
+  message += "{\"Name\":\"led3\",\"Type\":\"led\"},";
+  message += "{\"Name\":\"led4\",\"Type\":\"led\"},";
+  message += "{\"Name\":\"led5\",\"Type\":\"led\"}";
+  message += "]\r\n";
   Serial.print(message);
 }

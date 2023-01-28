@@ -27,9 +27,15 @@ namespace DesktopDirector.Console
             //    System.Console.WriteLine(device.Name);
             //}
 
-            System.Console.WriteLine("Listening to messages");
             var arduinoEventService = new ArduinoEventService();
             arduinoEventService.MessageRecieved += ArduinoEventService_MessageRecieved;
+            System.Console.WriteLine("Rquesting Configuration");
+            var configuration = arduinoEventService.RequestConfiguration();
+            if(configuration ==  null)
+            {
+                System.Console.WriteLine("Configuration not recieved");
+            }
+            System.Console.WriteLine("Listening to messages");
             arduinoEventService.StartListening();
         }
 

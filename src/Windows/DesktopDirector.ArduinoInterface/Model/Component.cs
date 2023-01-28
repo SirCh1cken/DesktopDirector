@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesktopDirector.App.Models
+namespace DesktopDirector.ArduinoInterface.Model
 {
     public class Component
     {

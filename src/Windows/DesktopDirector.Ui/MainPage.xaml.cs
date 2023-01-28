@@ -1,4 +1,4 @@
-﻿using DesktopDirector.App.Models;
+﻿using DesktopDirector.ArduinoInterface.Model;
 using System.Collections.ObjectModel;
 
 namespace DesktopDirector.Ui

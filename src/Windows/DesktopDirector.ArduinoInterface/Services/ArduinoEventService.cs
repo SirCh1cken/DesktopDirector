@@ -18,6 +18,41 @@ namespace DesktopDirector.ArduinoInterface.Services
 
         public event EventHandler<ArduinoMessageArgs> MessageRecieved;
 
+        public Component[] RequestConfiguration()
+        {
+
+            using(var port = new SerialPort())
+            {
+                port.PortName = "COM4";
+                port.BaudRate = 9600;
+                port.Open();
+
+                port.WriteLine("request-configuration");
+                Component[] configuration = null;
+                for (var i = 0; i < 5; i++)
+                {
+                    string inputMessage = port.ReadLine();
+                    try
+                    {
+                        configuration = JsonSerializer.Deserialize<Component[]>(inputMessage);
+                        if(configuration != null)
+                        {
+                            return configuration;
+                        }
+                    }
+                    catch { }
+                }
+
+                port.Close();
+                return null;
+
+            }
+
+
+
+
+        }
+
         public void StartListening()
         {
             serialPort = new SerialPort();

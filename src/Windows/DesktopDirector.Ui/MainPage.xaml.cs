@@ -1,4 +1,5 @@
-﻿using DesktopDirector.ArduinoInterface.Model;
+﻿using DesktopDirector.App.Model;
+using DesktopDirector.ArduinoInterface.Model;
 using System.Collections.ObjectModel;
 
 namespace DesktopDirector.Ui
@@ -14,11 +15,15 @@ namespace DesktopDirector.Ui
 
             InitializeComponent();
 
-            Components = new ObservableCollection<Component>(app.Components);
+            Components = new ObservableCollection<ComponentConfiguration>(app.Components);
             components.ItemsSource = Components;
+
+            Plugins = new ObservableCollection<string>(app.Plugins.Select(plugin => plugin.Name));
+            plugins.ItemsSource = Plugins; 
         }
 
-        public ObservableCollection<Component> Components { get; set; }
+        public ObservableCollection<ComponentConfiguration> Components { get; set; }
+        public ObservableCollection<string> Plugins { get; set; }
 
 
         private void OnCounterClicked(object sender, EventArgs e)

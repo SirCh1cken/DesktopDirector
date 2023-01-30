@@ -10,5 +10,6 @@ namespace DesktopDirector.ArduinoInterface.Model
     {
         public string Name { get; set; }
         public string Type { get; set; }
+        public string Address { get; set; }
     }
 }

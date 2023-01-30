@@ -144,7 +144,7 @@ void SendMessage(String inputIdentifier, int value)
 void SendConfiurationMessage()
 {
   String message = "[";
-  message += "{\"Name\":\"button0\",\"Type\":\"button\"},";
+  message += "{\"Name\":\"button0\",\"Type\":\"button\",\"Address\":\"d1\"},";
   message += "{\"Name\":\"button1\",\"Type\":\"button\"},";
   message += "{\"Name\":\"button2\",\"Type\":\"button\"},";
   message += "{\"Name\":\"button3\",\"Type\":\"button\"},";

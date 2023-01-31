@@ -25,7 +25,7 @@ namespace DesktopDirector.Plugins.Services
 
                 pluginDescriptors.Add(pluginDescriptor);
             }
-            return pluginDescriptors;
+            return pluginDescriptors.OrderBy(pluginDescriptor=> pluginDescriptor.Name);
 
         }
     }

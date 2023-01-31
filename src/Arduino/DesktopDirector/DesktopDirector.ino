@@ -144,21 +144,21 @@ void SendMessage(String inputIdentifier, int value)
 void SendConfiurationMessage()
 {
   String message = "[";
-  message += "{\"Name\":\"button0\",\"Type\":\"button\",\"Address\":\"d1\"},";
-  message += "{\"Name\":\"button1\",\"Type\":\"button\"},";
-  message += "{\"Name\":\"button2\",\"Type\":\"button\"},";
-  message += "{\"Name\":\"button3\",\"Type\":\"button\"},";
-  message += "{\"Name\":\"button4\",\"Type\":\"button\"},";
-  message += "{\"Name\":\"button5\",\"Type\":\"button\"},";
-  message += "{\"Name\":\"pot0\",\"Type\":\"knob\"},";
-  message += "{\"Name\":\"pot1\",\"Type\":\"knob\"},";
-  message += "{\"Name\":\"pot2\",\"Type\":\"knob\"},";
-  message += "{\"Name\":\"led0\",\"Type\":\"led\"},";
-  message += "{\"Name\":\"led1\",\"Type\":\"led\"},";
-  message += "{\"Name\":\"led2\",\"Type\":\"led\"},";
-  message += "{\"Name\":\"led3\",\"Type\":\"led\"},";
-  message += "{\"Name\":\"led4\",\"Type\":\"led\"},";
-  message += "{\"Name\":\"led5\",\"Type\":\"led\"}";
+  message += "{\"Name\":\"button0\",\"ComponentType\":\"button\",\"Address\":\"d1\"},";
+  message += "{\"Name\":\"button1\",\"ComponentType\":\"button\"},";
+  message += "{\"Name\":\"button2\",\"ComponentType\":\"button\"},";
+  message += "{\"Name\":\"button3\",\"ComponentType\":\"button\"},";
+  message += "{\"Name\":\"button4\",\"ComponentType\":\"button\"},";
+  message += "{\"Name\":\"button5\",\"ComponentType\":\"button\"},";
+  message += "{\"Name\":\"pot0\",\"ComponentType\":\"knob\"},";
+  message += "{\"Name\":\"pot1\",\"ComponentType\":\"knob\"},";
+  message += "{\"Name\":\"pot2\",\"ComponentType\":\"knob\"},";
+  message += "{\"Name\":\"led0\",\"ComponentType\":\"led\"},";
+  message += "{\"Name\":\"led1\",\"ComponentType\":\"led\"},";
+  message += "{\"Name\":\"led2\",\"ComponentType\":\"led\"},";
+  message += "{\"Name\":\"led3\",\"ComponentType\":\"led\"},";
+  message += "{\"Name\":\"led4\",\"ComponentType\":\"led\"},";
+  message += "{\"Name\":\"led5\",\"ComponentType\":\"led\"}";
   message += "]\r\n";
   Serial.print(message);
 }

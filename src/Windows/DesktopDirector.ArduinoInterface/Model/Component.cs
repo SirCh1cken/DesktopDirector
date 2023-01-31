@@ -9,7 +9,7 @@ namespace DesktopDirector.ArduinoInterface.Model
     public class Component
     {
         public string Name { get; set; }
-        public string Type { get; set; }
+        public string ComponentType { get; set; }
         public string Address { get; set; }
     }
 }

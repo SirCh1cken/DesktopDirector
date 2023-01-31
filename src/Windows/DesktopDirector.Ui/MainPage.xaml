@@ -70,10 +70,11 @@
                 FontSize="18"
                 HorizontalOptions="Start" />
                 <Label
-                    Text="{Binding SelectedItem.Component.Type}"
+                    Text="{Binding SelectedItem.Component.ComponentType}"
                     SemanticProperties.HeadingLevel="Level3"
                     FontSize="16"
                     HorizontalOptions="Start"
+                    BindingContext="{x:Reference components}"
                     />
                 <Label
                 Text="Recent Events"

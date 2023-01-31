@@ -9,6 +9,10 @@ namespace DesktopDirector.App.Model
 {
     public class ComponentConfiguration
     {
+        public ComponentConfiguration() { 
+            Plugins = new List<PluginConfiguration>();
+        }
         public Component Component { get; set; }
+        public IList<PluginConfiguration> Plugins { get; set; }
     }
 }

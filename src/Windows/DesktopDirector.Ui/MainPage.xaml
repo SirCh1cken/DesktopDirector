@@ -23,7 +23,8 @@
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-                <ListView x:Name="components" ItemsSource="{Binding Components}">
+                <ListView x:Name="components" 
+                          ItemSelected="OnComponentsItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -48,33 +49,33 @@
             <VerticalStackLayout
                 Padding="30,0">
                 <Label
-                    Text="{Binding SelectedItem.Component.Name}"
+                    x:Name="selectedComponentName"
                     SemanticProperties.HeadingLevel="Level1"
                     FontSize="32"
                     HorizontalOptions="Start"
-                    BindingContext="{x:Reference components}"/>
+                    
+                    />
                 <Label
                     Text="Address:"
                     SemanticProperties.HeadingLevel="Level2"
                     FontSize="18"
                     HorizontalOptions="Start"/>
                 <Label
-                    Text="{Binding SelectedItem.Component.Address}"
+                    x:Name="selectedComponentAddress"
                     SemanticProperties.HeadingLevel="Level3"
                     FontSize="16"
                     HorizontalOptions="Start"
-                    BindingContext="{x:Reference components}"/>
+                    />
                 <Label
                 Text="Type:"
                 SemanticProperties.HeadingLevel="Level2"
                 FontSize="18"
                 HorizontalOptions="Start" />
                 <Label
-                    Text="{Binding SelectedItem.Component.ComponentType}"
+                    x:Name="selectedComponentComponentType"
                     SemanticProperties.HeadingLevel="Level3"
                     FontSize="16"
                     HorizontalOptions="Start"
-                    BindingContext="{x:Reference components}"
                     />
                 <Label
                 Text="Recent Events"
@@ -88,22 +89,59 @@
                 FontSize="32"
                 HorizontalOptions="Start" />
                 <Picker
-                    x:Name="plugins"
-                    Title="Plugin"
+                    x:Name="availablePlugins"
+                    Title="Add plugin:"
+                    ItemDisplayBinding="{Binding Name}"
                     />
-
-                <Label
+                <Button
+                    Text="Add Plugin"
+                    Clicked="OnAddPluginClicked"
+                    ></Button>
+                <ListView 
+                    x:Name="selectedComponentConfiguredPlugins" >
+                    <ListView.Header>
+                        <Label
+                            Text="Configured Plugins"></Label>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                       Text="{Binding Plugin.Name}"
+                                       FontAttributes="Bold" />
+                                    <Editor Grid.Column="1"
+                                        Text="{Binding Configuration}"
+                                        x:Name="selectedPluginConfiguration"
+                                        MinimumHeightRequest="100"
+                                        MinimumWidthRequest="500"
+                                        AutoSize="TextChanges"
+                                        ></Editor>
+                                    <!--<Button Grid.Column="2"
+                                        Text="Save"
+                                        Clicked="OnPlguinConfigurationSaved"
+                                        ></Button>-->
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<Label
                     Text="Plugin Config"
                     SemanticProperties.HeadingLevel="Level1"
                     FontSize="32"
-                    HorizontalOptions="Start" />
-                <Label
-                    Text="{Binding SelectedItem}"
-                    SemanticProperties.HeadingLevel="Level2"
-                    FontSize="18"
                     HorizontalOptions="Start" 
-                    BindingContext="{x:Reference plugins}"
-                    />
+                    />-->
+
+
             </VerticalStackLayout>
         </HorizontalStackLayout>
     </ScrollView>

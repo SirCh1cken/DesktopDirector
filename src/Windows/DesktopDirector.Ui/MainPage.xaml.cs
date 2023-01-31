@@ -26,6 +26,7 @@ namespace DesktopDirector.Ui
 
         public ObservableCollection<ComponentConfiguration> Components { get; set; }
         public ObservableCollection<PluginDescriptor> AvailablePluginDescriptors { get; set; }
+        public bool IsListening { get { return app.IsListening; } }
 
 
         private void OnComponentsItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -65,12 +66,16 @@ namespace DesktopDirector.Ui
         private void OnStartListeningClicked(object sender, EventArgs e)
         {
             this.app.StartListening();
+            this.startListeningButton.IsEnabled = false;
+            this.stopListeningButton.IsEnabled = true;
+
         }
 
         private void OnStopListeningClicked(object sender, EventArgs e)
         {
             this.app.StopListening();
-
+            this.startListeningButton.IsEnabled = true;
+            this.stopListeningButton.IsEnabled = false;
         }
     }
 }

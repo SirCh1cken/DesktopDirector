@@ -6,8 +6,17 @@
     <ScrollView>
         <HorizontalStackLayout>
             <VerticalStackLayout>
-                <Button Text="Start Listening" Clicked="OnStartListeningClicked"></Button>
-                <Button Text="Stop Listening" Clicked="OnStopListeningClicked"></Button>
+                <Button 
+                    x:Name="startListeningButton"
+                    Text="Start Listening" 
+                    Clicked="OnStartListeningClicked">
+                </Button>
+                <Button 
+                    x:Name="stopListeningButton"
+                    Text="Stop Listening" 
+                    IsEnabled="False"
+                    Clicked="OnStopListeningClicked">
+                </Button>
             </VerticalStackLayout>
             <VerticalStackLayout
                 Padding="30,0">

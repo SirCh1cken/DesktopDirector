@@ -102,7 +102,10 @@ void loop() {
       {
         String buttonIdentifier = "button";
         buttonIdentifier = buttonIdentifier + i;
-        SendMessage(buttonIdentifier, currentValue);
+
+        bool buttonOn = (currentValue == 0);
+
+        SendMessage(buttonIdentifier, buttonOn);
         buttonMapping[i][1] = currentValue;
         buttonMapping[i][2]= now;
 
@@ -123,6 +126,7 @@ void loop() {
       {
         String potIdentifier = "pot";
         potIdentifier = potIdentifier + i;
+
         SendMessage(potIdentifier, currentValue);
         potMapping[i][1] = currentValue;
         potMapping[i][2]= now;
@@ -132,6 +136,16 @@ void loop() {
 }
 
 void SendMessage(String inputIdentifier, int value)
+{
+  String message = "{\"Input\":\"";
+  message = message + inputIdentifier;     
+  message = message + "\",\"Value\":";
+  message = message + value;
+  message += "}\r\n";
+  Serial.print(message);
+}
+
+void SendMessage(String inputIdentifier, bool value)
 {
   String message = "{\"Input\":\"";
   message = message + inputIdentifier;     

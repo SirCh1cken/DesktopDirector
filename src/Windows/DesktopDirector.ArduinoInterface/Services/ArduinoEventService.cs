@@ -1,6 +1,7 @@
 ﻿using DesktopDirector.ArduinoInterface.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,10 @@ namespace DesktopDirector.ArduinoInterface.Services
     public class ArduinoEventService : IArduinoEventService
     {
         private SerialPort serialPort;
-        public ArduinoEventService() 
+        private Thread listeningThread;
+        private bool keepListening;
+
+        public ArduinoEventService()
         {
         }
 
@@ -21,7 +25,7 @@ namespace DesktopDirector.ArduinoInterface.Services
         public Component[] RequestConfiguration()
         {
 
-            using(var port = new SerialPort())
+            using (var port = new SerialPort())
             {
                 port.PortName = "COM4";
                 port.BaudRate = 9600;
@@ -35,7 +39,7 @@ namespace DesktopDirector.ArduinoInterface.Services
                     try
                     {
                         configuration = JsonSerializer.Deserialize<Component[]>(inputMessage);
-                        if(configuration != null)
+                        if (configuration != null)
                         {
                             return configuration;
                         }
@@ -45,15 +49,29 @@ namespace DesktopDirector.ArduinoInterface.Services
 
                 port.Close();
                 return null;
-
             }
-
-
-
-
         }
 
         public void StartListening()
+        {
+            keepListening = true;
+            listeningThread = new Thread(new ThreadStart(Listen));
+            listeningThread.Start();
+        }
+        public void StopListening()
+        {
+            keepListening = false;
+            listeningThread = null;
+        }
+
+        public bool IsListening
+        {
+            get
+            {
+                return keepListening && (listeningThread != null) && listeningThread.IsAlive;
+            }
+        }
+        private void Listen()
         {
             serialPort = new SerialPort();
 
@@ -61,7 +79,7 @@ namespace DesktopDirector.ArduinoInterface.Services
             serialPort.PortName = "COM4";
             serialPort.BaudRate = 9600;
             serialPort.Open();
-            while (true)
+            while (keepListening)
             {
                 string inputMessage = serialPort.ReadLine();
                 if (!string.IsNullOrEmpty(inputMessage))
@@ -81,11 +99,10 @@ namespace DesktopDirector.ArduinoInterface.Services
                 }
                 //Thread.Sleep(100);
             }
-        }
 
-        public void StopListening()
-        {
             serialPort.Close();
         }
+
+
     }
 }

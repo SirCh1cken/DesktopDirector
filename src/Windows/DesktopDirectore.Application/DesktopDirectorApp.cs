@@ -21,6 +21,8 @@ namespace DesktopDirector.App
         public IList<ComponentConfiguration> Components { get; private set; }
         public IList<PluginDescriptor> PluginDescriptors { get; private set; }
 
+        public bool IsListening { get { return arduinoEventService.IsListening; } }
+
         private void Initialise()
         {
             Components = arduinoEventService.RequestConfiguration().Select(comp => new ComponentConfiguration { Component = comp }).ToList();
@@ -37,6 +39,10 @@ namespace DesktopDirector.App
             arduinoEventService.StartListening();
         }
 
+        public void StopListening()
+        {
+            arduinoEventService.StopListening();
+        }
         private void UpdatePluginInstanceMap()
         {
             pluginInstanceMap = new Dictionary<string, IPlugin[]>();
@@ -56,10 +62,7 @@ namespace DesktopDirector.App
             }
         }
 
-        public void StopListening()
-        {
-            arduinoEventService.StopListening();
-        }
+
 
         private void HandleMessage(object? sender, ArduinoMessageArgs e)
         {

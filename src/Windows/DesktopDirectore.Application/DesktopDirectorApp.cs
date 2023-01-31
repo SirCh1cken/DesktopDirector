@@ -1,34 +1,30 @@
 ﻿using DesktopDirector.App.Model;
 using DesktopDirector.ArduinoInterface.Model;
 using DesktopDirector.ArduinoInterface.Services;
+using DesktopDirector.Plugins.Model;
+using DesktopDirector.Plugins.Services;
+using System.Reflection;
 
 namespace DesktopDirector.App
 {
     public class DesktopDirectorApp
     {
         private readonly ArduinoEventService arduinoEventService;
+        private readonly IEnumerable<PluginDescriptor> pluginDescriptors;
 
         public DesktopDirectorApp()
         {
             this.arduinoEventService = new ArduinoEventService();
+            this.pluginDescriptors = new PluginDiscoveryService().DiscoverPlugins();
             Initialise();
         }
 
         public IEnumerable<ComponentConfiguration> Components { get; private set; }
-        public IEnumerable<Plugin> Plugins
+        public IEnumerable<PluginDescriptor> PluginDescriptors
         {
             get
             {
-                return new Plugin[] {
-                    new Plugin{ Name="Change Default Audio Device" },
-                    new Plugin{ Name="Change Communication Audio Device" },
-                    new Plugin{ Name="Change Mute/UnMute Audio Device" },
-                    new Plugin{ Name="Change Enable/Disable Camera" },
-                    new Plugin{ Name="Run Process" },
-                    new Plugin{ Name="Send key stroke/s" },
-                    new Plugin{ Name="Something for teams" },
-                    new Plugin{ Name="Something for OBS" },
-                };
+                return pluginDescriptors;
             }
         }
 

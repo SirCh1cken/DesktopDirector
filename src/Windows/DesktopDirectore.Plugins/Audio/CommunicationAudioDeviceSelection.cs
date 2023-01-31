@@ -1,8 +1,10 @@
 ﻿using DesktopDirector.ArduinoInterface.Model;
 using DesktopDirector.AudioDeviceCmdlets.Service;
+using DesktopDirector.Plugins.Model;
 
 namespace DesktopDirector.Plugins.Audio
 {
+    [PluginName("Set Communication Audio Device")]
     public class CommunicationAudioDeviceSelection : IPlugin
     {
         private string deviceName;

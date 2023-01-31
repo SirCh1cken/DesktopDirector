@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DesktopDirector.ArduinoInterface\DesktopDirector.ArduinoInterface.csproj" />
+    <ProjectReference Include="..\DesktopDirectore.Plugins\DesktopDirector.Plugins.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using DesktopDirector.ArduinoInterface.Model;
 using DesktopDirector.AudioDeviceCmdlets.Service;
+using DesktopDirector.Plugins.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace DesktopDirector.Plugins.Audio
 {
+    [PluginName("Set Default Audio Device")]
     public class DefaultAudioDeviceSelection : IPlugin
     {
         private string deviceName;

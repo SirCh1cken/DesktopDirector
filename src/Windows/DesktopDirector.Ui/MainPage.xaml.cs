@@ -1,5 +1,6 @@
 ﻿using DesktopDirector.App.Model;
 using DesktopDirector.ArduinoInterface.Model;
+using DesktopDirector.Plugins.Model;
 using System.Collections.ObjectModel;
 
 namespace DesktopDirector.Ui
@@ -18,15 +19,15 @@ namespace DesktopDirector.Ui
             Components = new ObservableCollection<ComponentConfiguration>(app.Components);
             components.ItemsSource = Components;
 
-            AvailablePlugins = new ObservableCollection<Plugin>(app.Plugins);
-            availablePlugins.ItemsSource = AvailablePlugins;
+            AvailablePluginDescriptors = new ObservableCollection<PluginDescriptor>(app.PluginDescriptors);
+            availablePluginDescriptors.ItemsSource = AvailablePluginDescriptors;
 
             //selectedComponentPlugins.ItemsSource = AvailablePlugins;
         }
 
 
         public ObservableCollection<ComponentConfiguration> Components { get; set; }
-        public ObservableCollection<Plugin> AvailablePlugins { get; set; }
+        public ObservableCollection<PluginDescriptor> AvailablePluginDescriptors { get; set; }
         //public ComponentConfiguration SelectedComponentConfiguration { get; set; }
         //public Plugin SelectedPlugin { get; set; }
 
@@ -64,7 +65,7 @@ namespace DesktopDirector.Ui
         private void OnAddPluginClicked(object sender, EventArgs e)
         {
             var selectedComponent = components.SelectedItem as ComponentConfiguration;
-            var selectedPlugin = availablePlugins.SelectedItem as Plugin;
+            var selectedPlugin = availablePluginDescriptors.SelectedItem as PluginDescriptor;
 
             if (selectedComponent != null && selectedPlugin != null)
             {
@@ -112,7 +113,7 @@ namespace DesktopDirector.Ui
             if (components.SelectedItem != null)
             {
                 var selectedComponent = components.SelectedItem as ComponentConfiguration;
-                var selectedPlugin = availablePlugins.SelectedItem as Plugin;
+                var selectedPlugin = availablePluginDescriptors.SelectedItem as PluginDescriptor;
 
                 if (selectedPlugin != null)
                 {
@@ -121,7 +122,7 @@ namespace DesktopDirector.Ui
                         Plugin = selectedPlugin
                     });
 
-                    availablePlugins.SelectedItem = null;
+                    availablePluginDescriptors.SelectedItem = null;
                 }
             }
         }

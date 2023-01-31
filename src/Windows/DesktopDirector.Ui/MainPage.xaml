@@ -89,7 +89,7 @@
                 FontSize="32"
                 HorizontalOptions="Start" />
                 <Picker
-                    x:Name="availablePlugins"
+                    x:Name="availablePluginDescriptors"
                     Title="Add plugin:"
                     ItemDisplayBinding="{Binding Name}"
                     />

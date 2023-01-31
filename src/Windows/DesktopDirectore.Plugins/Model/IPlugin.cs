@@ -5,5 +5,7 @@ namespace DesktopDirector.Plugins.Model
     public interface IPlugin
     {
         void Execute(Message message);
+
+        string Configuration { set; }
     }
 }

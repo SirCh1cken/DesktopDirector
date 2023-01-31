@@ -11,17 +11,23 @@ namespace DesktopDirector.Plugins.Audio
         private AudioDeviceService audioDeviceService;
         private string deviceId;
 
-        public CommunicationAudioDeviceSelection(string deviceName)
+        public CommunicationAudioDeviceSelection()
         {
-            this.deviceName = deviceName;
             this.audioDeviceService = new AudioDeviceService();
-            var devices = audioDeviceService.GetAudioDevices();
-            var device = devices.FirstOrDefault(device => device.Name == deviceName);
-            if (device == null)
+        }
+        public string Configuration
+        {
+            set
             {
-                throw new ArgumentException($"Could not find device {deviceName}");
+                this.deviceName = value;
+                var devices = audioDeviceService.GetAudioDevices();
+                var device = devices.FirstOrDefault(device => device.Name == deviceName);
+                if (device == null)
+                {
+                    throw new ArgumentException($"Could not find device {deviceName}");
+                }
+                this.deviceId = device.ID;
             }
-            this.deviceId = device.ID;
         }
 
         public void Execute(Message message)

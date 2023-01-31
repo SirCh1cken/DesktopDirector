@@ -10,30 +10,68 @@ namespace DesktopDirector.App
     public class DesktopDirectorApp
     {
         private readonly ArduinoEventService arduinoEventService;
-        private readonly IEnumerable<PluginDescriptor> pluginDescriptors;
+        private Dictionary<string, IPlugin[]> pluginInstanceMap;
 
         public DesktopDirectorApp()
         {
             this.arduinoEventService = new ArduinoEventService();
-            this.pluginDescriptors = new PluginDiscoveryService().DiscoverPlugins();
             Initialise();
         }
 
-        public IEnumerable<ComponentConfiguration> Components { get; private set; }
-        public IEnumerable<PluginDescriptor> PluginDescriptors
-        {
-            get
-            {
-                return pluginDescriptors;
-            }
-        }
+        public IList<ComponentConfiguration> Components { get; private set; }
+        public IList<PluginDescriptor> PluginDescriptors { get; private set; }
 
         private void Initialise()
         {
-            Components = arduinoEventService.RequestConfiguration().Select(comp => new ComponentConfiguration { Component = comp });
+            Components = arduinoEventService.RequestConfiguration().Select(comp => new ComponentConfiguration { Component = comp }).ToList();
+            PluginDescriptors = new PluginDiscoveryService().DiscoverPlugins().ToList();
+        }
+
+        public void StartListening()
+        {
+            arduinoEventService.MessageRecieved += HandleMessage;
+            UpdatePluginInstanceMap();
+
 
             // Need to set this to start listening on background thread
-            //arduinoEventService.StartListening();
+            arduinoEventService.StartListening();
+        }
+
+        private void UpdatePluginInstanceMap()
+        {
+            pluginInstanceMap = new Dictionary<string, IPlugin[]>();
+            foreach (var componentConfiguration in Components)
+            {
+                var componentKey = componentConfiguration.Component.Name;
+                var plugins = new List<IPlugin>();
+                foreach (var pluginConfiguration in componentConfiguration.Plugins)
+                {
+                    IPlugin plugin = (IPlugin)Activator.CreateInstance(pluginConfiguration.Plugin.PluginType);
+                    plugin.Configuration = pluginConfiguration.Configuration;
+                    plugins.Add(plugin);
+                }
+
+                pluginInstanceMap.Add(componentKey, plugins.ToArray());
+
+            }
+        }
+
+        public void StopListening()
+        {
+            arduinoEventService.StopListening();
+        }
+
+        private void HandleMessage(object? sender, ArduinoMessageArgs e)
+        {
+            if (pluginInstanceMap.ContainsKey(e.Message.Input))
+            {
+                var plugins = pluginInstanceMap[e.Message.Input];
+                foreach (var plugin in plugins)
+                {
+                    plugin.Execute(e.Message);
+                }
+
+            }
         }
     }
 }

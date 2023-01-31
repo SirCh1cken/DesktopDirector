@@ -49,33 +49,28 @@ namespace DesktopDirector.Ui
 
             if (selectedComponent != null && selectedPlugin != null)
             {
-                selectedComponent.Plugins.Add(new PluginConfiguration
+                var pluginConfiguration = new PluginConfiguration
                 {
                     Plugin = selectedPlugin
-                });
+                };
+                selectedComponent.Plugins.Add(pluginConfiguration);
 
                 selectedComponentConfiguredPlugins.ItemsSource = new ObservableCollection<PluginConfiguration>(selectedComponent.Plugins);
 
+                //var component = app.Components.First(component => component.Component.Name == selectedComponent.Component.Name);
+                //component.Plugins.Add(pluginConfiguration);
             }
         }
 
-        private void OnAdditionalPluginSelected(object sender, EventArgs e)
+        private void OnStartListeningClicked(object sender, EventArgs e)
         {
-            if (components.SelectedItem != null)
-            {
-                var selectedComponent = components.SelectedItem as ComponentConfiguration;
-                var selectedPlugin = availablePluginDescriptors.SelectedItem as PluginDescriptor;
+            this.app.StartListening();
+        }
 
-                if (selectedPlugin != null)
-                {
-                    selectedComponent.Plugins.Add(new PluginConfiguration
-                    {
-                        Plugin = selectedPlugin
-                    });
+        private void OnStopListeningClicked(object sender, EventArgs e)
+        {
+            this.app.StopListening();
 
-                    availablePluginDescriptors.SelectedItem = null;
-                }
-            }
         }
     }
 }

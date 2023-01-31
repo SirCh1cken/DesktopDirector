@@ -11,12 +11,12 @@ namespace DesktopDirector.Console
     class Program
     {
         private static Dictionary<string, IPlugin> pluginMapping = new Dictionary<string, IPlugin> {
-            { "button0", new DefaultAudioDeviceSelection("Headphones - Wireless (ATH-G1WL)") },
-            { "button1", new CommunicationAudioDeviceSelection("Headphones - Wireless (ATH-G1WL)") },
-            { "button2", new DefaultAudioDeviceSelection("Headphones - Wired (6- Samson Q2U Microphone)") },
-            { "button3", new CommunicationAudioDeviceSelection("Headphones - Wired (6- Samson Q2U Microphone)") },
-            { "button4", new DefaultAudioDeviceSelection("Mixer CH1 (2- USB Audio CODEC )") },
-            { "button5", new CommunicationAudioDeviceSelection("Mixer CH1 (2- USB Audio CODEC )") }
+            //{ "button0", new DefaultAudioDeviceSelection("Headphones - Wireless (ATH-G1WL)") },
+            //{ "button1", new CommunicationAudioDeviceSelection("Headphones - Wireless (ATH-G1WL)") },
+            //{ "button2", new DefaultAudioDeviceSelection("Headphones - Wired (6- Samson Q2U Microphone)") },
+            //{ "button3", new CommunicationAudioDeviceSelection("Headphones - Wired (6- Samson Q2U Microphone)") },
+            //{ "button4", new DefaultAudioDeviceSelection("Mixer CH1 (2- USB Audio CODEC )") },
+            //{ "button5", new CommunicationAudioDeviceSelection("Mixer CH1 (2- USB Audio CODEC )") }
         };
         static void Main(string[] args)
         {

@@ -5,8 +5,13 @@
 
     <ScrollView>
         <HorizontalStackLayout>
+            <VerticalStackLayout>
+                <Button Text="Start Listening" Clicked="OnStartListeningClicked"></Button>
+                <Button Text="Stop Listening" Clicked="OnStopListeningClicked"></Button>
+            </VerticalStackLayout>
             <VerticalStackLayout
                 Padding="30,0">
+
                 <Label
                 Text="Device"
                 SemanticProperties.HeadingLevel="Level1"

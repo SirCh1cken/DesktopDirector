@@ -29,15 +29,16 @@ namespace DesktopDirector.ArduinoInterface.Services
             {
                 port.PortName = "COM4";
                 port.BaudRate = 9600;
+                port.ReadTimeout = 50;
                 port.Open();
 
                 port.WriteLine("request-configuration");
                 Component[] configuration = null;
                 for (var i = 0; i < 5; i++)
                 {
-                    string inputMessage = port.ReadLine();
                     try
                     {
+                        string inputMessage = port.ReadLine();
                         configuration = JsonSerializer.Deserialize<Component[]>(inputMessage);
                         if (configuration != null)
                         {
@@ -78,31 +79,28 @@ namespace DesktopDirector.ArduinoInterface.Services
             //Set your board COM
             serialPort.PortName = "COM4";
             serialPort.BaudRate = 9600;
+            serialPort.ReadTimeout = 50;
             serialPort.Open();
             while (keepListening)
             {
-                string inputMessage = serialPort.ReadLine();
-                if (!string.IsNullOrEmpty(inputMessage))
+                try
                 {
-                    System.Console.WriteLine(inputMessage);
-
-                    try
+                    string inputMessage = serialPort.ReadLine();
+                    if (!string.IsNullOrEmpty(inputMessage))
                     {
+                        System.Console.WriteLine(inputMessage);
                         var message = JsonSerializer.Deserialize<Message>(inputMessage);
                         MessageRecieved?.Invoke(this, new ArduinoMessageArgs() { Message = message });
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.ToString());
-                    }
-
                 }
-                //Thread.Sleep(100);
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+
             }
 
             serialPort.Close();
         }
-
-
     }
 }

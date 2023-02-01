@@ -1,76 +1,44 @@
-const int kCh1DefaultButton = 13;
-const int kCh1CommsButton = 12;
-const int kCh1DefefaultLed = 5;
-const int kCh1CommsLed = 4;
-const int kCh1Pot = A0;
+#include "Component.h"
+#include "ComponentType.cpp"
 
-const int kCh2DefaultButton = 11;
-const int kCh2CommsButton = 10;
-const int kCh2DefefaultLed = 3;
-const int kCh2CommsLed = 2;
-const int kCh2Pot = A1;
+const int numberOfComponents = 15;
 
-const int kCh3DefaultButton = 9;
-const int kCh3CommsButton = 8;
-const int kCh3DefefaultLed = 1;
-const int kCh3CommsLed = 0;
-const int kCh3Pot = A2;
-
-const int deBounceDelay = 50;
-const int analogChangeThreshold = 5;
-
-const int numberOfButtons = 6;
-// input pin, previous value of input button, last changed,  corresponding outpur pin,
-int buttonMapping[numberOfButtons][4] = 
-{
-  {kCh1DefaultButton, 0, 0, kCh1DefefaultLed},
-  {kCh1CommsButton, 0,0, kCh1CommsLed},
-  {kCh2DefaultButton ,0 ,0 ,kCh2DefefaultLed},
-  {kCh2CommsButton, 0 ,0 ,kCh2CommsLed},
-  {kCh3DefaultButton ,0, 0, kCh3DefefaultLed},
-  {kCh3CommsButton, 0, 0, kCh3CommsLed},
+Component components[] = {
+  Component(ComponentTypeLed, 0, -1,"Led1"),
+  Component(ComponentTypeLed, 1, -1,"Led2"),
+  Component(ComponentTypeLed, 2, -1,"Led3"),
+  Component(ComponentTypeLed, 3, -1,"Led4"),
+  Component(ComponentTypeLed, 4, -1,"Led5"),
+  Component(ComponentTypeLed, 5, -1,"Led6"),
+  Component(ComponentTypeButton, 8, -1,"Button1"),
+  Component(ComponentTypeButton, 9, -1,"Button2"),
+  Component(ComponentTypeButton, 10, -1,"Button3"),
+  Component(ComponentTypeButton, 11, -1,"Button4"),
+  Component(ComponentTypeButton, 12, -1,"Button5"),
+  Component(ComponentTypeButton, 13, -1,"Button6"),
+  Component(ComponentTypePotentiometer, A0, -1,"Potentiometer1"),
+  Component(ComponentTypePotentiometer, A1, -1,"Potentiometer2"),
+  Component(ComponentTypePotentiometer, A2, -1,"Potentiometer3")
 };
 
-const int numberOfPots = 3;
-// input pin, previous value of pot, last change
-int potMapping[numberOfPots][3] = 
-{
-  {kCh1Pot, 0, 0},
-  {kCh2Pot, 0, 0},
-  {kCh3Pot, 0, 0},
-};
 
 void setup() {
-  pinMode(kCh1DefaultButton, INPUT);
-  digitalWrite(kCh1DefaultButton, HIGH);
-  pinMode(kCh1CommsButton, INPUT);
-  digitalWrite(kCh1CommsButton, HIGH);
-  pinMode(kCh1DefefaultLed, OUTPUT);
-  pinMode(kCh1CommsLed, OUTPUT);
-  pinMode(kCh1Pot, INPUT);
-
-  pinMode(kCh2DefaultButton, INPUT);
-  digitalWrite(kCh2DefaultButton, HIGH);
-  pinMode(kCh2CommsButton, INPUT);
-  digitalWrite(kCh2CommsButton, HIGH);
-  pinMode(kCh2DefefaultLed, OUTPUT);
-  pinMode(kCh2CommsLed, OUTPUT);
-  pinMode(kCh2Pot, INPUT);
-
-  pinMode(kCh3DefaultButton, INPUT);
-  digitalWrite(kCh3DefaultButton, HIGH);
-  pinMode(kCh3CommsButton, INPUT);
-  digitalWrite(kCh3CommsButton, HIGH);
-  pinMode(kCh3DefefaultLed, OUTPUT);
-  pinMode(kCh3CommsLed, OUTPUT);
-  pinMode(kCh3Pot, INPUT);
+  for(int i=0; i < numberOfComponents; i ++)
+  {
+    components[i].Setup();
+  }
 
   Serial.begin(9600);
 
 }
 
 void loop() {
+  ProcessRecievedMessages();
+  ProcessSensors();
+}
 
+void ProcessRecievedMessages()
+{
   if(Serial.available() > 0)  
   {          
     String receivedMessage = Serial.readStringUntil('\n');
@@ -79,100 +47,29 @@ void loop() {
       SendConfiurationMessage();
     }
   }
-
-  for(int i = 0; i < numberOfButtons ; i++)
-  {
-    int currentValue = digitalRead(buttonMapping[i][0]);
-    bool buttonOn = (currentValue == LOW);
-    // if(buttonOn)
-    // {
-    //   digitalWrite(buttonMapping[i][1], HIGH);
-    // }
-    // else
-    // {
-    //   digitalWrite(buttonMapping[i][1], LOW);
-    // }
-
-    int previousValue = buttonMapping[i][1];
-    if(currentValue != previousValue)
-    {
-      int lastChanged = buttonMapping[i][2];
-      int now = millis();
-      if(now - lastChanged > deBounceDelay)
-      {
-        String buttonIdentifier = "button";
-        buttonIdentifier = buttonIdentifier + i;
-
-        bool buttonOn = (currentValue == 0);
-
-        SendMessage(buttonIdentifier, buttonOn);
-        buttonMapping[i][1] = currentValue;
-        buttonMapping[i][2]= now;
-
-      }
-    }
-  }
-
-  for(int i = 0; i < numberOfPots ; i++)
-  {
-    int currentValue = map(analogRead(potMapping[i][0]),0,1023,0,255);
-
-    int previousValue = potMapping[i][1];
-    if(currentValue != previousValue && abs(currentValue - previousValue) > analogChangeThreshold)
-    {
-      int lastChanged = potMapping[i][2];
-      int now = millis();
-      if(now - lastChanged > deBounceDelay)
-      {
-        String potIdentifier = "pot";
-        potIdentifier = potIdentifier + i;
-
-        SendMessage(potIdentifier, currentValue);
-        potMapping[i][1] = currentValue;
-        potMapping[i][2]= now;
-      }
-    }
-  }
 }
 
-void SendMessage(String inputIdentifier, int value)
+void ProcessSensors()
 {
-  String message = "{\"Input\":\"";
-  message = message + inputIdentifier;     
-  message = message + "\",\"Value\":";
-  message = message + value;
-  message += "}\r\n";
-  Serial.print(message);
-}
-
-void SendMessage(String inputIdentifier, bool value)
-{
-  String message = "{\"Input\":\"";
-  message = message + inputIdentifier;     
-  message = message + "\",\"Value\":";
-  message = message + value;
-  message += "}\r\n";
-  Serial.print(message);
+  for(int i=0; i < numberOfComponents; i ++)
+  {
+    components[i].Read();
+  }
 }
 
 void SendConfiurationMessage()
 {
-  String message = "[";
-  message += "{\"Name\":\"button0\",\"ComponentType\":\"button\",\"Address\":\"d1\"},";
-  message += "{\"Name\":\"button1\",\"ComponentType\":\"button\"},";
-  message += "{\"Name\":\"button2\",\"ComponentType\":\"button\"},";
-  message += "{\"Name\":\"button3\",\"ComponentType\":\"button\"},";
-  message += "{\"Name\":\"button4\",\"ComponentType\":\"button\"},";
-  message += "{\"Name\":\"button5\",\"ComponentType\":\"button\"},";
-  message += "{\"Name\":\"pot0\",\"ComponentType\":\"knob\"},";
-  message += "{\"Name\":\"pot1\",\"ComponentType\":\"knob\"},";
-  message += "{\"Name\":\"pot2\",\"ComponentType\":\"knob\"},";
-  message += "{\"Name\":\"led0\",\"ComponentType\":\"led\"},";
-  message += "{\"Name\":\"led1\",\"ComponentType\":\"led\"},";
-  message += "{\"Name\":\"led2\",\"ComponentType\":\"led\"},";
-  message += "{\"Name\":\"led3\",\"ComponentType\":\"led\"},";
-  message += "{\"Name\":\"led4\",\"ComponentType\":\"led\"},";
-  message += "{\"Name\":\"led5\",\"ComponentType\":\"led\"}";
-  message += "]\r\n";
-  Serial.print(message);
+  Serial.print("[");
+
+  for(int i=0; i < numberOfComponents; i ++)
+  {
+    String componentConfiguration = components[i].ReportConfiguration();
+    Serial.print(componentConfiguration);
+    if(i+1 < numberOfComponents)
+    {
+      Serial.print(",");
+    }
+  }
+
+  Serial.print("]\r\n");
 }

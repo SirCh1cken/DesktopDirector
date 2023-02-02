@@ -42,10 +42,16 @@ void ProcessRecievedMessages()
   if(Serial.available() > 0)  
   {          
     String receivedMessage = Serial.readStringUntil('\n');
-    if(receivedMessage == "request-configuration")
+    
+    if(receivedMessage.startsWith("component-message"))
+    {
+      ProcessComponentMessage(receivedMessage);
+    }
+    else if(receivedMessage.startsWith("request-configuration"))
     {
       SendConfiurationMessage();
     }
+
   }
 }
 
@@ -72,4 +78,22 @@ void SendConfiurationMessage()
   }
 
   Serial.print("]\r\n");
+}
+
+void ProcessComponentMessage(String message)
+{
+  Serial.println(message);
+
+  int firstSeparatorIndex = message.indexOf(",");
+  String messageWithoutPrefix = message.substring(firstSeparatorIndex+1);
+  int secondSeparatorIndex = messageWithoutPrefix.indexOf(",");
+  String componentName = messageWithoutPrefix.substring(0,secondSeparatorIndex);
+  String messageForComponent = messageWithoutPrefix.substring(secondSeparatorIndex+1);
+  for(int i=0; i < numberOfComponents; i ++)
+  {
+    if(components[i]._componentName == componentName)
+    {
+      components[i].ProcessMessage(messageForComponent);
+    }
+  }
 }

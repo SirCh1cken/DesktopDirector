@@ -4,9 +4,11 @@
 class Component {
   public:
     Component(String componentType, int arduinoPin, int multiplexerPin, String componentName);
+    String _componentName;
     void Setup();
     String ReportConfiguration ();
     void Read();
+    void ProcessMessage(String message);
 
   private:
     const int kDebounceDelay = 50;
@@ -17,7 +19,6 @@ class Component {
     int _multiplexerPin;
     int _previousValue;
     int _lastChanged;
-    String _componentName;
     void ReadButton();
     void ReadPotentiometer();
 };

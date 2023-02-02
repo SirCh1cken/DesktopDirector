@@ -62,8 +62,6 @@ namespace DesktopDirector.App
             }
         }
 
-
-
         private void HandleMessage(object? sender, ArduinoMessageArgs e)
         {
             if (pluginInstanceMap.ContainsKey(e.Message.Input))
@@ -71,9 +69,8 @@ namespace DesktopDirector.App
                 var plugins = pluginInstanceMap[e.Message.Input];
                 foreach (var plugin in plugins)
                 {
-                    plugin.Execute(e.Message);
+                    plugin.Execute(e.Message,arduinoEventService, e.Message.Input);
                 }
-
             }
         }
     }

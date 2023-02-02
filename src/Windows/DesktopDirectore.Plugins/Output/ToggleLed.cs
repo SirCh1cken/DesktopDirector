@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesktopDirector.Plugins.Shell
+namespace DesktopDirector.Plugins.Output
 {
-    [PluginName("Run a program")]
-    public class RunProcess : IPlugin
+    [PluginName("Turn an LED on or off")]
+
+    public class ToggleLed : IPlugin
     {
         private string configuration;
 
@@ -21,10 +22,11 @@ namespace DesktopDirector.Plugins.Shell
         {
             if (message.Value == 1)
             {
-                Process notepad = new Process();
-                notepad.StartInfo.FileName = configuration;
-                //notepad.StartInfo.Arguments = "DemoText";
-                notepad.Start();
+                var configurationSegments = configuration.Split(',');
+                var targetComponent = configurationSegments[0];
+                var componentMessage = configurationSegments[1];
+
+                arduinoEventService.SendMessageToComponent(targetComponent, componentMessage);
             }
         }
     }

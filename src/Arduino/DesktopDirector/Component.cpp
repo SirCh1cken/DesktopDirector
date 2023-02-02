@@ -100,3 +100,19 @@ void Component::ReadPotentiometer()
     }
   }
 }
+
+void Component::ProcessMessage(String message)
+{
+  Serial.println(message);
+  if(_componentType == ComponentTypeLed)
+  {
+    if(message=="on")
+    {
+      digitalWrite(_arduinoPin, HIGH);
+    }
+    else if(message="off")
+    {
+      digitalWrite(_arduinoPin, LOW);
+    }
+  }
+}

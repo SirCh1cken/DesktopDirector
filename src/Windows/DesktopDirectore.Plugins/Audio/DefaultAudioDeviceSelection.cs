@@ -1,4 +1,5 @@
 ﻿using DesktopDirector.ArduinoInterface.Model;
+using DesktopDirector.ArduinoInterface.Services;
 using DesktopDirector.AudioDeviceCmdlets.Service;
 using DesktopDirector.Plugins.Model;
 using System;
@@ -36,7 +37,7 @@ namespace DesktopDirector.Plugins.Audio
             }
         }
 
-        public void Execute(Message message)
+        public void Execute(Message message, ArduinoEventService arduinoEventService, string componentName)
         {
             if (message.Value == 1)
             {

@@ -18,6 +18,9 @@ namespace DesktopDirector.Console
             //{ "button4", new DefaultAudioDeviceSelection("Mixer CH1 (2- USB Audio CODEC )") },
             //{ "button5", new CommunicationAudioDeviceSelection("Mixer CH1 (2- USB Audio CODEC )") }
         };
+
+        private static ArduinoEventService arduinoEventService;
+
         static void Main(string[] args)
         {
             //var audioDeviceService = new AudioDeviceService();
@@ -27,7 +30,7 @@ namespace DesktopDirector.Console
             //    System.Console.WriteLine(device.Name);
             //}
 
-            var arduinoEventService = new ArduinoEventService();
+            arduinoEventService = new ArduinoEventService();
             arduinoEventService.MessageRecieved += ArduinoEventService_MessageRecieved;
             System.Console.WriteLine("Rquesting Configuration");
             var configuration = arduinoEventService.RequestConfiguration();
@@ -44,7 +47,7 @@ namespace DesktopDirector.Console
             if(pluginMapping.ContainsKey(e.Message.Input))
             {
                 var plugin = pluginMapping[e.Message.Input];
-                plugin.Execute(e.Message);
+                plugin.Execute(e.Message, arduinoEventService, e.Message.Input);
 
             }
         }

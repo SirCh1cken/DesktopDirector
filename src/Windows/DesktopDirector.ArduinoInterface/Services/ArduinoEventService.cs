@@ -29,7 +29,7 @@ namespace DesktopDirector.ArduinoInterface.Services
             {
                 port.PortName = "COM4";
                 port.BaudRate = 9600;
-                port.ReadTimeout = 50;
+                port.ReadTimeout = 1000;
                 port.Open();
 
                 port.WriteLine("request-configuration");
@@ -101,6 +101,11 @@ namespace DesktopDirector.ArduinoInterface.Services
             }
 
             serialPort.Close();
+        }
+
+        public void SendMessageToComponent(string componentName, string message)
+        {
+            serialPort.WriteLine($"component-message,{componentName},{message}");
         }
     }
 }

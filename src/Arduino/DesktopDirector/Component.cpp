@@ -35,7 +35,7 @@ String Component::ReportConfiguration()
   configurationString += _componentType;
   configurationString += "\",\"Address\":\"";
   configurationString += _arduinoPin;
-  configurationString += "x";
+  configurationString += "-";
   configurationString += _multiplexerPin;
   configurationString += "\"}";
   return configurationString;
@@ -73,8 +73,8 @@ void Component::ReadButton()
       message += _componentName;     
       message += "\",\"Value\":";
       message += buttonOn;
-      message += "}\r\n";
-      Serial.print(message);
+      message += "}";
+      Serial.println(message);
     }
   }
 }
@@ -95,23 +95,27 @@ void Component::ReadPotentiometer()
       message += _componentName;
       message += "\",\"Value\":";
       message += currentValue;
-      message += "}\r\n";
-      Serial.print(message);
+      message += "}";
+      Serial.println(message);
     }
   }
 }
 
 void Component::ProcessMessage(String message)
-{
+{ 
   Serial.println(message);
+  Serial.println(_arduinoPin);
   if(_componentType == ComponentTypeLed)
   {
     if(message=="on")
     {
+      Serial.println("turn on");
+
       digitalWrite(_arduinoPin, HIGH);
     }
     else if(message="off")
     {
+      Serial.println("turn off");
       digitalWrite(_arduinoPin, LOW);
     }
   }

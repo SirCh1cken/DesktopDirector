@@ -32,12 +32,12 @@ namespace DesktopDirector.ArduinoInterface.Services
                 port.ReadTimeout = 1000;
                 port.Open();
 
-                port.WriteLine("request-configuration");
                 Component[] configuration = null;
                 for (var i = 0; i < 5; i++)
                 {
                     try
                     {
+                        port.WriteLine("request-configuration");
                         string inputMessage = port.ReadLine();
                         configuration = JsonSerializer.Deserialize<Component[]>(inputMessage);
                         if (configuration != null)
@@ -45,7 +45,10 @@ namespace DesktopDirector.ArduinoInterface.Services
                             return configuration;
                         }
                     }
-                    catch { }
+                    catch (Exception ex) 
+                    { 
+
+                    }
                 }
 
                 port.Close();

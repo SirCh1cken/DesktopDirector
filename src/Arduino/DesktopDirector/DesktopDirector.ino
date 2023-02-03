@@ -1,24 +1,21 @@
 #include "Component.h"
 #include "ComponentType.cpp"
 
-const int numberOfComponents = 15;
+const int numberOfComponents = 10;
 
 Component components[] = {
-  Component(ComponentTypeLed, 0, -1,"Led1"),
-  Component(ComponentTypeLed, 1, -1,"Led2"),
-  Component(ComponentTypeLed, 2, -1,"Led3"),
-  Component(ComponentTypeLed, 3, -1,"Led4"),
-  Component(ComponentTypeLed, 4, -1,"Led5"),
-  Component(ComponentTypeLed, 5, -1,"Led6"),
-  Component(ComponentTypeButton, 8, -1,"Button1"),
-  Component(ComponentTypeButton, 9, -1,"Button2"),
-  Component(ComponentTypeButton, 10, -1,"Button3"),
-  Component(ComponentTypeButton, 11, -1,"Button4"),
-  Component(ComponentTypeButton, 12, -1,"Button5"),
-  Component(ComponentTypeButton, 13, -1,"Button6"),
-  Component(ComponentTypePotentiometer, A0, -1,"Potentiometer1"),
-  Component(ComponentTypePotentiometer, A1, -1,"Potentiometer2"),
-  Component(ComponentTypePotentiometer, A2, -1,"Potentiometer3")
+  // Component(ComponentTypeButton, 0, -1,"Button0"),
+  // Component(ComponentTypeButton, 1, -1,"Button1"),
+  Component(ComponentTypeButton, 2, -1,"Button2"),
+  Component(ComponentTypeButton, 3, -1,"Button3"),
+  Component(ComponentTypeButton, 4, -1,"Button4"),
+  Component(ComponentTypeButton, 5, -1,"Button5"),
+  Component(ComponentTypeButton, 6, -1,"Button6"),
+  Component(ComponentTypeButton, 7, -1,"Button7"),
+  Component(ComponentTypeLed, 8, -1,"LedWhite"),
+  Component(ComponentTypeLed, 9, -1,"LedRed"),
+  Component(ComponentTypeLed, 10, -1,"LedYellow"),
+  Component(ComponentTypeLed, 11, -1,"LedBlue")
 };
 
 
@@ -29,7 +26,6 @@ void setup() {
   }
 
   Serial.begin(9600);
-
 }
 
 void loop() {
@@ -89,6 +85,7 @@ void ProcessComponentMessage(String message)
   int secondSeparatorIndex = messageWithoutPrefix.indexOf(",");
   String componentName = messageWithoutPrefix.substring(0,secondSeparatorIndex);
   String messageForComponent = messageWithoutPrefix.substring(secondSeparatorIndex+1);
+
   for(int i=0; i < numberOfComponents; i ++)
   {
     if(components[i]._componentName == componentName)

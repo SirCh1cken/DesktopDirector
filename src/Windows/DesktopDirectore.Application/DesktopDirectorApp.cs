@@ -43,7 +43,7 @@ namespace DesktopDirector.App
         {
             arduinoEventService.StopListening();
         }
-        private void UpdatePluginInstanceMap()
+        public void UpdatePluginInstanceMap()
         {
             pluginInstanceMap = new Dictionary<string, IPlugin[]>();
             foreach (var componentConfiguration in Components)

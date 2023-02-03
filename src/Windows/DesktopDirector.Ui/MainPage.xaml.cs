@@ -77,5 +77,10 @@ namespace DesktopDirector.Ui
             this.startListeningButton.IsEnabled = true;
             this.stopListeningButton.IsEnabled = false;
         }
+
+        private void OnsavePluginsButtonClicked(object sender, EventArgs e)
+        {
+            this.app.UpdatePluginInstanceMap();
+        }
     }
 }

@@ -17,6 +17,11 @@
                     IsEnabled="False"
                     Clicked="OnStopListeningClicked">
                 </Button>
+                <Button 
+                    x:Name="savePluginsButton"
+                    Text="Save Plugins" 
+                    Clicked="OnsavePluginsButtonClicked">
+                </Button>
             </VerticalStackLayout>
             <VerticalStackLayout
                 Padding="30,0">
